@@ -2,11 +2,18 @@ require_relative "../config/environment.rb"
 require 'active_support/inflector'
 
 class InteractiveRecord
-
+  #normally we set the table name to
+  #the class name pluralized. 
+  #class Song will have a db table songs
   def self.table_name
     self.to_s.downcase.pluralize
   end
-
+  #pragma table_info pulls all the
+  #info, including the 'name' of each column
+  #the column name is stored under the key :name
+  #we use an each method to find the key 
+  #holding the column name, which we store
+  # in an array called column_name.Cool huh?
   def self.column_names
     DB[:conn].results_as_hash = true
 
